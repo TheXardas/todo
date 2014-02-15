@@ -1,5 +1,42 @@
-This page will load a fucking awesome desktop.
-<br/>
-Essencially a super-duper page.
-<br/>
-Trully.
+{% extends 'AppMainBundle::layout.html.twig' %}
+
+{% block title %}Todo Desktop{% endblock %}
+{% block h1 %}Todo Desktop{% endblock %}
+
+{% block stylesheets %}
+    <link rel="stylesheet" href="{{ asset( 'bundles/appmain/css/home.css' ) }}" />
+{% endblock %}
+
+{% block content %}
+    <div id="sidebar">
+        i am a sidebar
+    </div>
+
+    <div id="main">
+        <h2>Todo list</h2>
+
+        {{ form( add_task_form ) }}
+
+        <form action="{{ path('task_create') }}" method="post">
+            <input type="text" value="Add todo..." name="name" />
+        </form>
+
+        {# ajax-loadable area #}
+        <div id="main-content">
+            i am a main fucking area
+            This page will load a fucking awesome desktop.
+            <br/>
+            Essencially a super-duper page.
+            <br/>
+            Trully.
+        </div>
+
+    </div>
+
+    <div id="footer">
+        {% block footer %}
+            айм а футар
+        {% endblock %}
+    </div>
+
+{% endblock %}

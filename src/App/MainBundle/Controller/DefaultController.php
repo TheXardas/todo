@@ -22,11 +22,16 @@ class DefaultController extends Controller
 	/**
 	 * Main desktop. Users works here.
 	 *
-	 * @Route("/home")
+	 * @Route("/home", name="home")
 	 * @Template()
 	 */
 	public function homeAction()
 	{
-		return array();
+		$form = $this->createFormBuilder()
+				  ->add( 'name', 'text' )
+				  ->setAction($this->generateUrl('task_create'))
+				  ->getForm();
+
+		return array( 'add_task_form' => $form->createView() );
 	}
 }

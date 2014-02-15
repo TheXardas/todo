@@ -1,3 +1,8 @@
+app_task:
+    resource: "@AppTaskBundle/Controller/"
+    type:     annotation
+    prefix:   /
+
 app_main:
     resource: "@AppMainBundle/Controller/"
     type:     annotation

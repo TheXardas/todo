@@ -1,0 +1,28 @@
+html, body
+{
+	margin: 0;
+	padding: 0;
+	height: 100%;
+	width: 100%;
+}
+
+body
+{
+	background: #fff;
+	font: 14px/1.333 sans-serif;
+	color: #080000;
+}
+
+#wrap {
+	margin:0 auto;
+	background:#99c;
+	height: 100%;
+}
+
+#header {
+	background:#ddd;
+}
+
+#footer {
+	background:#cc9;
+}

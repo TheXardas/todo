@@ -1,0 +1,4 @@
+task_create:
+    resource: "@AppTaskBundle/Controller/TaskController.php"
+    type:     annotation
+    prefix:   /task

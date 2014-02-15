@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html"; charset=utf-8" />
+    <title>{%  block title %}Todo{% endblock %}</title>
+    {% block stylesheets %}
+    {% endblock %}
+    <link href="{{ asset( 'bundles/appmain/css/layout.css') }}" rel="stylesheet" />
+    <link href="{{ asset( 'bundles/appmain/css/jquery-ui.min.css') }}" rel="stylesheet" />
+    <link rel="shortcut icon" href="{{ asset('favicon.ico') }}" />
+
+    <script type="text/javascript" src="{{ asset( 'bundles/appmain/js/jquery.min.js') }}"></script>
+    <script type="text/javascript" src="{{ asset( 'bundles/appmain/js/jquery-ui.min.js') }}"></script>
+</head>
+<body>
+{% block body %}
+    <div id="wrapper">
+        <div id="header">
+            {% block header %}
+                <h1>{% block h1 %}{% endblock %}</h1>
+            {% endblock %}
+        </div>
+
+        <div id="content">
+            {% block content %}{% endblock %}
+        </div>
+    </div>
+
+    {% block javascripts %}
+    {% endblock %}
+{% endblock %}
+</body>
+</html>
