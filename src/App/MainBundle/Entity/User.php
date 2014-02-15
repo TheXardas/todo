@@ -1,0 +1,201 @@
+<?php
+/**
+ * Created by JetBrains PhpStorm.
+ * User: xardas
+ * Date: 2/15/14
+ * Time: 1:55 PM
+ * To change this template use File | Settings | File Templates.
+ */
+
+namespace App\MainBundle\Entity;
+
+use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Security\Core\User\UserInterface;
+
+/**
+ * Acme\MainBundle\Entity\User
+ *
+ * @ORM\Table(name="users")
+ * @ORM\Entity(repositoryClass="App\MainBundle\Entity\UserRepository")
+ */
+class User implements UserInterface, \Serializable
+{
+	/**
+	 * @ORM\Column(type="integer")
+	 * @ORM\Id
+	 * @ORM\GeneratedValue(strategy="AUTO")
+	 */
+	protected $id;
+	/**
+	 * @ORM\Column(type="string", length=25, unique=true)
+	 */
+	protected $username;
+	/**
+	 * @ORM\Column(type="string", length=64)
+	 */
+	protected $password;
+	/**
+	 * @ORM\Column(type="string", length=100, unique=true)
+	 */
+	protected $email;
+	/**
+	 * @ORM\Column(name="is_active", type="boolean")
+	 */
+	protected $isActive;
+
+	public function __construct()
+	{
+		$this->isActive = true;
+	}
+
+	/**
+	 * @inheritDoc
+	 */
+	public function getUsername()
+	{
+		return $this->username;
+	}
+
+	/**
+	 * Set username
+	 *
+	 * @param string $username
+	 * @return User
+	 */
+	public function setUsername( $username )
+	{
+		$this->username = $username;
+
+		return $this;
+	}
+
+	/**
+	 * @inheritDoc
+	 */
+	public function getSalt()
+	{
+		// you *may* need a real salt depending on your encoder
+		// see section on salt below
+		return null;
+	}
+
+	/**
+	 * @inheritDoc
+	 */
+	public function getPassword()
+	{
+		return $this->password;
+	}
+
+	/**
+	 * Set password
+	 *
+	 * @param string $password
+	 * @return User
+	 */
+	public function setPassword( $password )
+	{
+		$this->password = $password;
+
+		return $this;
+	}
+
+	/**
+	 * @inheritDoc
+	 */
+	public function getRoles()
+	{
+		return array('ROLE_USER');
+	}
+
+	/**
+	 * @inheritDoc
+	 */
+	public function eraseCredentials()
+	{
+	}
+
+	/**
+	 * @see \Serializable::serialize()
+	 */
+	public function serialize()
+	{
+		return serialize( array(
+			$this->id,
+			$this->username,
+			$this->password,
+			// see section on salt below
+			// $this->salt,
+		) );
+	}
+
+	/**
+	 * @see \Serializable::unserialize()
+	 */
+	public function unserialize( $serialized )
+	{
+		list (
+			$this->id,
+			$this->username,
+			$this->password,
+			// see section on salt below
+			// $this->salt
+			) = unserialize( $serialized );
+	}
+
+	/**
+	 * Get id
+	 *
+	 * @return integer
+	 */
+	public function getId()
+	{
+		return $this->id;
+	}
+
+	/**
+	 * Get email
+	 *
+	 * @return string
+	 */
+	public function getEmail()
+	{
+		return $this->email;
+	}
+
+	/**
+	 * Set email
+	 *
+	 * @param string $email
+	 * @return User
+	 */
+	public function setEmail( $email )
+	{
+		$this->email = $email;
+
+		return $this;
+	}
+
+	/**
+	 * Get isActive
+	 *
+	 * @return boolean
+	 */
+	public function getIsActive()
+	{
+		return $this->isActive;
+	}
+
+	/**
+	 * Set isActive
+	 *
+	 * @param boolean $isActive
+	 * @return User
+	 */
+	public function setIsActive( $isActive )
+	{
+		$this->isActive = $isActive;
+
+		return $this;
+	}
+}
