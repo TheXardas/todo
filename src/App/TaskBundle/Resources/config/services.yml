@@ -1,0 +1,8 @@
+services:
+  app_task.form.task_simple_add:
+    class: App\TaskBundle\Form\Type\TaskSimpleType
+    tags:
+      - { name: form.type, alias: task_simple }
+
+  app_task.helpers.encoder:
+    class: App\TaskBundle\Helpers\Encoder

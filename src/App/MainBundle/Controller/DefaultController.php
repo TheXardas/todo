@@ -2,6 +2,7 @@
 
 namespace App\MainBundle\Controller;
 
+use App\TaskBundle\Entity\Task;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
@@ -27,10 +28,9 @@ class DefaultController extends Controller
 	 */
 	public function homeAction()
 	{
-		$form = $this->createFormBuilder()
-				  ->add( 'name', 'text' )
-				  ->setAction($this->generateUrl('task_create'))
-				  ->getForm();
+		$form = $this->createForm( 'task_simple', new Task(), array(
+			'action' => $this->generateUrl( 'task_create' ),
+		) );
 
 		return array( 'add_task_form' => $form->createView() );
 	}

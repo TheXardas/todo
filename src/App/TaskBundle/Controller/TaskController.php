@@ -13,18 +13,41 @@ use Symfony\Component\HttpFoundation\Request;
 
 class TaskController extends Controller
 {
+	/**
+	 * @Template()
+	 */
+	public function listWidgetAction( Request $request )
+	{
+		return array('taskListUrl' => $this->generateUrl( 'task_list' ));
+	}
+
+
+	/**
+	 * @Route("/task/list", name="task_list")
+	 * @Template()
+	 *
+	 */
+	public function listAction( Request $request )
+	{
+		$repository = $this->getDoctrine()->getRepository( 'AppTaskBundle:Task' );
+		$tasks = $repository->findAll();
+
+		$encoder = $this->container->get( 'app_task.helpers.encoder' );
+		$tasks = $encoder->encode( $tasks );
+
+		return new JsonResponse( $tasks );
+	}
+
     /**
      * @Route("/task/create", name="task_create")
      * @Template()
-	  * @Method("POST")
+     * @Method("POST")
      */
     public function createAction( Request $request )
     {
 		 $task = new Task();
 
-		 $form = $this->createFormBuilder( $task )
-			 ->add( 'name', 'text' )
-			 ->getForm();
+		 $form = $this->createForm( 'task_simple', $task );
 
 		 $form->handleRequest( $request );
 
